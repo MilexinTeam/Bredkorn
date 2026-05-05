@@ -189,7 +189,14 @@ private async loadThemeRecursive(themeName: string): Promise<any> {
   // Jeśli nie ma inherit — to jest korzeń
   return data;
 }
+private addedThemes = [
 
+];
+public addTheme(name: string, data: any) {
+  this.addedThemes.push({ name, data
+  });
+
+}
 private async loadTheme() {
   this._theme = await this.loadThemeRecursive(this.options.theme as string);
 }
@@ -209,7 +216,14 @@ private async loadTheme() {
               case "cs-light-plus":
         return await import("../../themes/cs-light-plus");
       default:
+        if (this.addedThemes.some(t => t.name === name)) {
+          return {
+            default: () => JSON.stringify(this.addedThemes.find(t => t.name === name)?.data)
+          }
+        }
+        else {
         return await import("../../themes/cs-dark");
+        }
     }
   }
 
@@ -675,7 +689,7 @@ private async loadTheme() {
 
     return { line, col };
   }
-
+  
   private initMouse() {
     this.homeElement.addEventListener("mousedown", (e) => {
       const rect = this.homeElement.getBoundingClientRect();
