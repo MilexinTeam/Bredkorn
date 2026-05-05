@@ -1,0 +1,6 @@
+src/
+.gitignore/
+test.html
+test.js
+tsup.config.ts
+package.json

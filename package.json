@@ -1,0 +1,36 @@
+{
+  "name": "bredkorn",
+  "version": "1.1.0",
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "devDependencies": {
+
+    "tsup": "^8.5.1",
+    "typescript": "~5.9.3"
+
+  },
+  "contributors": [
+    {
+      "name": "BandleJS",
+      "role": "Lead Developer"
+    },
+    {
+      "name": "MilexisTeam",
+      "role": "Lead Developer"
+    },
+    {
+      "name": "MyWindowsCrack",
+      "role": "Lead Developer"
+    }
+  ],
+  "files": [
+    "/dist"
+  ]
+}
