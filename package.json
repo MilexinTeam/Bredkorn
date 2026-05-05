@@ -1,6 +1,6 @@
 {
   "name": "bredkorn",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -28,5 +28,4 @@
       "role": "Lead Developer"
     }
   ]
-
 }
