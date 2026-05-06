@@ -252,7 +252,7 @@ private async loadTheme() {
     this.redoStack = [];
   }
 
-  private doUndo() {
+  public doUndo() {
     const state = this.undoStack.pop();
     if (!state) return;
     this.redoStack.push({
@@ -270,7 +270,7 @@ private async loadTheme() {
     this.requestRender();
   }
 
-  private doRedo() {
+  public doRedo() {
     const state = this.redoStack.pop();
     if (!state) return;
     this.undoStack.push({
@@ -288,24 +288,24 @@ private async loadTheme() {
     this.requestRender();
   }
 
-  private clearSelection() {
+  public clearSelection() {
     this.selectionAnchor = null;
     this.selectionActive = null;
   }
 
-  private hasSelection(): boolean {
+  public hasSelection(): boolean {
     if (!this.selectionAnchor || !this.selectionActive) return false;
     return !isSamePos(this.selectionAnchor, this.selectionActive);
   }
 
-  private getSelectionRange(): [Pos, Pos] | null {
+  public getSelectionRange(): [Pos, Pos] | null {
     if (!this.selectionAnchor || !this.selectionActive) return null;
     const [a, b] = normalizeSelection(this.lines, this.selectionAnchor, this.selectionActive);
     if (isSamePos(a, b)) return null;
     return [a, b];
   }
 
-  private deleteSelection() {
+  public deleteSelection() {
     const range = this.getSelectionRange();
     if (!range) return;
     this.pushUndo();
@@ -325,7 +325,7 @@ private async loadTheme() {
     this.clearSelection();
   }
 
-  private getSelectedText(): string {
+  public getSelectedText(): string {
     const range = this.getSelectionRange();
     if (!range) return "";
     const [a, b] = range;
@@ -355,7 +355,7 @@ private async loadTheme() {
     }
   }
 
-  private async pasteFromClipboard() {
+  public async pasteFromClipboard() {
     let text = "";
     try {
       if (navigator.clipboard && navigator.clipboard.readText) {
