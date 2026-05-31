@@ -827,6 +827,7 @@ this.scrollOffsetY = Math.min(
 );
 
       this.requestRender();
+      console.log("scroll", this.scrollOffsetY, "max", maxScroll);
     });
 
     window.addEventListener("resize", () => {
@@ -890,7 +891,7 @@ this.scrollOffsetY = Math.min(
       this.drawBackground();
     });
   }
-
+private scrollbarPercent = 0
   private drawBackground() {
     if (!this.canvas || !this.ctx) return;
 

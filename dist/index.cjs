@@ -33,6 +33,10 @@ var init_cs_dark = __esm({
         colors: {
           color: "#fff",
           lineNumberColor: "#fff"
+        },
+        scrollbar: {
+          trackColor: "#000000",
+          bgColol: "#ffffff"
         }
       });
     };
@@ -247,6 +251,7 @@ var Bredkorn = class {
     this.undoStack = [];
     this.redoStack = [];
     this.addedThemes = [];
+    this.scrollbarPercent = 0;
     this.setTheme = async (v) => {
       this.options.theme = v;
       await this.loadTheme();
@@ -832,6 +837,7 @@ var Bredkorn = class {
         Math.max(0, this.scrollOffsetY + e.deltaY)
       );
       this.requestRender();
+      console.log("scroll", this.scrollOffsetY, "max", maxScroll);
     });
     window.addEventListener("resize", () => {
       this.ctx?.clearRect(

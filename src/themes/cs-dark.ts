@@ -12,6 +12,10 @@ main: {
 colors: {
     color: "#fff",
     lineNumberColor: "#fff"
+},
+scrollbar: {
+    trackColor: "#000000",
+    bgColol: "#ffffff",
 }
     })
 }

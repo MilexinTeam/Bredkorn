@@ -2,6 +2,10 @@ interface BredkornSetupOptions {
     theme?: string;
 }
 
+type Pos = {
+    line: number;
+    col: number;
+};
 declare class Bredkorn {
     private homeElement;
     private options;
@@ -33,15 +37,15 @@ declare class Bredkorn {
     private loadModule;
     private validateContainerSize;
     private pushUndo;
-    private doUndo;
-    private doRedo;
-    private clearSelection;
-    private hasSelection;
-    private getSelectionRange;
-    private deleteSelection;
-    private getSelectedText;
+    doUndo(): void;
+    doRedo(): void;
+    clearSelection(): void;
+    hasSelection(): boolean;
+    getSelectionRange(): [Pos, Pos] | null;
+    deleteSelection(): void;
+    getSelectedText(): string;
     private copySelectionToClipboard;
-    private pasteFromClipboard;
+    pasteFromClipboard(): Promise<void>;
     private initKeyboard;
     private handleKeyDown;
     private screenToPos;
@@ -52,6 +56,7 @@ declare class Bredkorn {
     private initCanvas;
     private getTextWidth;
     private requestRender;
+    private scrollbarPercent;
     private drawBackground;
     setCursorPosition(x: number, y: number): void;
     setTheme: (v: string) => Promise<void>;

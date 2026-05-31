@@ -14,6 +14,10 @@ var cs_dark_default = () => {
     colors: {
       color: "#fff",
       lineNumberColor: "#fff"
+    },
+    scrollbar: {
+      trackColor: "#000000",
+      bgColol: "#ffffff"
     }
   });
 };
