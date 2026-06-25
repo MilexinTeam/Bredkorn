@@ -20,5 +20,4 @@ editor.addTheme("dht-bamboo-dark", {
 
 
 await editor.init()
-editor.setTheme("dht-bamboo-dark")
-//editor.setTheme("cs-green")
+editor.setTheme("dht-bamboo-light")

@@ -1,6 +1,7 @@
 export interface BredkornSetupOptions {
     theme?: string;
 }
+export type Pos = { line: number; col: number };
 
 declare class Bredkorn {
     private homeElement;
@@ -40,10 +41,7 @@ declare class Bredkorn {
     private getSelectedText;
     private copySelectionToClipboard;
     private pasteFromClipboard;
-    private initKeyboard;
-    private handleKeyDown;
     private screenToPos;
-    private initMouse;
     private renderCursor;
     private loop;
     init(): Promise<void>;
