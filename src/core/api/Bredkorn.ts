@@ -2,9 +2,27 @@ import type { BredkornSetupOptions, Pos } from "./Bredkorn.types";
 import {deepMerge, insertChar, hexToRgb, hexToRgbString, getFont, initFontTTF, cloneLines, cmpPos, normPos, normalizeSelection, isSamePos} from "../helper"
 import {initKeyboard, handleKeyDown} from "../keybord"
 import { initMouse } from "../mouse";
+let linesDot = [
+  {dot: false}
+]
+
 // ===============================
 //  MAIN CLASS
 // ===============================
+function DrawEllipse(ctx : CanvasRenderingContext2D, x : number, y : number, xx : number, yy : number) {
+    const width = xx - x;
+    const height = yy - y;
+
+    const cx = x + width / 2;   // środek X
+    const cy = y + height / 2;  // środek Y
+
+    const rx = Math.abs(width / 2);   // promień poziomy
+    const ry = Math.abs(height / 2);  // promień pionowy
+
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+}
 
 export class Bredkorn {
   private homeElement: HTMLElement;
@@ -422,6 +440,7 @@ private screenToPos(x: number, y: number): Pos {
         this.requestRender();
         return;
       }
+      
 
 const maxScroll = Math.max(0, this.lineLength * lineHeight - rect.height);
 
@@ -447,8 +466,13 @@ this.scrollOffsetY = Math.min(
       this.initCanvas();
       this.requestRender();
     });
-
+this.addTextChangeCallback((lines) => {
+  if (linesDot.length != lines.length) {
+    linesDot.push({dot: false})
+  }
+})
     requestAnimationFrame((t) => this.loop(t));
+    
   }
 
   private initCanvas() {
@@ -550,6 +574,23 @@ private scrollbarPercent = 0
       const numWidth = this.getTextWidth(numText);
       const numY = lineCursor + lineHeight / 2;
 
+      
+const dotSize = Math.min(Math.max(this.panelWidth * 0.15, 8), 18);
+const gap = dotSize * 0.45;
+
+const dotX = this.panelWidth / 2 - numWidth / 2 - gap - dotSize;
+const dotY = numY - dotSize / 2;
+if (linesDot[i].dot) {
+ctx.fillStyle = `rgb(${linesDot[i].r}, ${linesDot[i].g}, ${linesDot[i].b})`;
+
+DrawEllipse(
+    ctx,
+    dotX,
+    dotY,
+    dotX + dotSize,
+    dotY + dotSize
+);
+}
       ctx.fillStyle = hexToRgbString(this._theme.colors.lineNumberColor);
       ctx.fillText(numText, this.panelWidth / 2 - numWidth / 2, numY);
 
@@ -602,7 +643,14 @@ private scrollbarPercent = 0
   // ===============================
   //  API
   // ===============================
-
+public addDotForLine(line, r, g,b) {
+  if (!linesDot[line])
+    throw new Error("Error: line do not exist")
+  linesDot[line].dot = true
+  linesDot[line].r = r
+  linesDot[line].g = g
+  linesDot[line].b = b
+}
   public setCursorPosition(x: number, y: number) {
     const p = normPos(this.lines, { line: y, col: x });
     this.cursorY = p.line;

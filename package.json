@@ -14,20 +14,6 @@
     "tsup": "^8.5.1",
     "typescript": "~5.9.3"
   },
-  "contributors": [
-    {
-      "name": "BandleJS",
-      "role": "Lead Developer"
-    },
-    {
-      "name": "MilexisTeam",
-      "role": "Lead Developer"
-    },
-    {
-      "name": "MyWindowsCrack",
-      "role": "Lead Developer"
-    }
-  ],
   "files": [
     "dist/",
     "README.md"

@@ -19,3 +19,4 @@ editor.addTheme("dht-bamboo-dark", {
 })
 await editor.init()
 editor.setTheme("cs-dark-plus")
+
