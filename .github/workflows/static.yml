@@ -39,7 +39,7 @@ jobs:
       - name: Prepare docs directory
         run: |
           rm -rf docs
-          mkdir docs
+          mkdir -p docs/dist
           cp -r dist/* docs/dist/
           cp test.html docs/demo.html
           cp test.js docs/test.js
