@@ -8,7 +8,7 @@ const themeFiles = fs.existsSync(themesDir)
   : [];
 
 const entry = {
-  index: "src/core/api/Bredkorn.ts",
+  index: "src/core/api/new/main.ts",
   ...Object.fromEntries(
     themeFiles.map(f => {
       const name = path.basename(f, ".ts");

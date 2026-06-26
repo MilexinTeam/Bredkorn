@@ -3,7 +3,7 @@ import {deepMerge, insertChar, hexToRgb, hexToRgbString, getFont, initFontTTF, c
 import {initKeyboard, handleKeyDown} from "../keybord"
 import { initMouse } from "../mouse";
 let linesDot = [
-  {dot: false}
+  {dot: false, r:0,g:0,b:0}
 ]
 
 // ===============================
@@ -468,7 +468,7 @@ this.scrollOffsetY = Math.min(
     });
 this.addTextChangeCallback((lines) => {
   if (linesDot.length != lines.length) {
-    linesDot.push({dot: false})
+    linesDot.push({dot: false,r:0,g:0,b:0})
   }
 })
     requestAnimationFrame((t) => this.loop(t));

@@ -1,5 +1,5 @@
 import Bredkorn from "./dist/index.js";
-const editor = new Bredkorn(document.querySelector(".editor"), {theme: "cs-dark-plus"})
+const editor = Bredkorn.getMAPI(document.querySelector(".editor"), {theme: "cs-dark-plus"})
 editor.addTheme("dht-bamboo-light", 
     {
         inherit: "cs-dark",
