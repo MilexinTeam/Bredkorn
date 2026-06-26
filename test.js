@@ -17,7 +17,5 @@ editor.addTheme("dht-bamboo-dark", {
         lineBgColor: "#131a10",       // delikatnie jaśniejsze tło linii
     }
 })
-
-
 await editor.init()
-editor.setTheme("dht-bamboo-light")
+editor.setTheme("cs-dark-plus")

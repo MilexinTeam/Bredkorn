@@ -101,6 +101,9 @@ private async loadTheme() {
         return await import("../../themes/cs-dark-plus");
               case "cs-light-plus":
         return await import("../../themes/cs-light-plus");
+        case "cs-dark-white":
+          return await import("../../themes/cs-dark-white");
+          break;
       default:
         if (this.addedThemes.some(t => t.name === name)) {
           return {
@@ -280,34 +283,52 @@ private async loadTheme() {
   //  MOUSE
   // ===============================
 
-  private screenToPos(x: number, y: number): Pos {
-    const rect = this.homeElement.getBoundingClientRect();
+private screenToPos(x: number, y: number): Pos {
     const fontSize = 20;
     const margin = 10;
+
+    // identycznie jak drawBackground()
     const lineHeight = fontSize + margin;
+    const renderedLineHeight = lineHeight + 10;
 
-    const localX = x;
-    const localY = y;
+    const firstLine = Math.floor(this.scrollOffsetY / lineHeight);
 
-    const lineIndex = Math.floor(
-      (localY + this.scrollOffsetY - 20) / (lineHeight + 10),
+    const localLine = Math.floor(
+        (y + (this.scrollOffsetY % lineHeight) - 20) /
+        renderedLineHeight
     );
-    const line = Math.max(0, Math.min(lineIndex, this.lines.length - 1));
 
-    if (!this.ctx) return { line, col: 0 };
+    const line = Math.max(
+        0,
+        Math.min(firstLine + localLine, this.lines.length - 1)
+    );
+
+    if (!this.ctx) {
+        return { line, col: 0 };
+    }
+
+    const content = this.lines[line] ?? "";
+
     this.ctx.font = `${fontSize}px "DynamicFont"`;
-    const charWidth = this.getTextWidth("M") || 1;
 
-    const colIndex = Math.floor(
-      (localX + this.scrollOffsetX - this.panelWidth - 10) / charWidth,
-    );
-    const col = Math.max(
-      0,
-      Math.min(colIndex, (this.lines[line] ?? "").length),
-    );
+    const textStartX = this.panelWidth + 10 - this.scrollOffsetX;
+
+    let col = 0;
+
+    for (let i = 0; i <= content.length; i++) {
+        const width = this.getTextWidth(content.slice(0, i));
+
+        if (x < textStartX + width) {
+            col = Math.max(0, i - 1);
+            break;
+        }
+
+        col = i;
+    }
 
     return { line, col };
-  }
+}
+
   
 
 
