@@ -1,4 +1,9 @@
-import Bredkorn from "./dist/index.js";
+try {
+const Bredkorn = await import("./dist/index.js")
+}
+catch {
+const Bredkorn = await import("./index.js")
+}
 const editor = new Bredkorn(document.querySelector(".editor"), {theme: "cs-dark-plus"})
 editor.addTheme("dht-bamboo-light", 
     {
