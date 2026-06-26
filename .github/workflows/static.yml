@@ -40,7 +40,7 @@ jobs:
         run: |
           rm -rf docs
           mkdir docs
-          cp -r dist/* docs/
+          cp -r dist/* docs/dist/
           cp test.html docs/demo.html
           cp test.js docs/test.js
 
